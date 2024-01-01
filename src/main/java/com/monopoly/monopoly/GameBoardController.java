@@ -3,7 +3,7 @@ package com.monopoly.monopoly;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class GameBoardController {
     @FXML
     private Label welcomeText;
 
