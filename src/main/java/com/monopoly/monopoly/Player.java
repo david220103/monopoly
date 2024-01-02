@@ -3,55 +3,56 @@ package com.monopoly.monopoly;
 import java.util.Random;
 
 public class Player {
-    private int AUTO_TRANSFER = 200;
-    private int uniqueId; //Each player has a unique Id in case of same names
+    private int id; //Each player has a unique Id in case of same names
     private String name; //Name of the player
-    private int totalMoney; //How much money the player has at any moment
-    private Field currentField; //Where is the player standing
-    private boolean outOfJail; //Does the player possess an out of jail card
-    private int outPayments; //For statistics (how much has the player paid out: e.g., Miete, Stafe, Steuern, usw.)
-    private int inPayments; //For statistics (how much has the player received: e.g., Gehalt, Klimabonus, erhaltende Miete, usw.)
+    private int balance; //How much money the player has at any moment
+    private int total_payments; //For statistics (how much has the player paid out: e.g., Miete, Stafe, Steuern, usw.)
+    private int total_income; //For statistics (how much has the player received: e.g., Gehalt, Klimabonus, erhaltende Miete, usw.)
+    private Field position; //Where is the player standing
+    private boolean has_out_of_jail_card; //Does the player possess an out of jail card
+    private GameManager gameManager;
+    private String color;
 
-    public Player(int uniqueId, String name){
-        this.uniqueId = uniqueId;
+    public Player(int id, String name, String color, GameManager gameManager) {
+        this.id = id;
         this.name = name;
-        this.totalMoney = inPayments - outPayments;
-        this.currentField = GameManager.getListOfFields().get(0);
-        this.outOfJail = false;
-        this.outPayments = 0;
-        this.inPayments = AUTO_TRANSFER;
+        this.balance = 200;
+        this.total_payments = 0;
+        this.total_income = 200;
+        this.gameManager = gameManager;
+        this.position = gameManager.getListOfFields().get(0);
+        this.has_out_of_jail_card = false;
+        this.color = color;
     }
 
-    //GETTERS & SETTERS
-    public int getUniqueId() { return uniqueId; }
-    public void setUniqueId(int uniqueId) { this.uniqueId = uniqueId; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public int getTotalMoney() { return totalMoney; }
-    public void setTotalMoney(int totalMoney) { this.totalMoney = totalMoney; }
-    public Field getCurrentField() { return currentField; }
-    public void setCurrentField(Field currentField) { this.currentField = currentField; }
-    public boolean isOutOfJail() { return outOfJail; }
-    public void setOutOfJail(boolean outOfJail) { this.outOfJail = outOfJail; }
-    public int getOutPayments() { return outPayments; }
-    public void setOutPayments(int outPayments) { this.outPayments = outPayments; }
-    public int getInPayments() { return inPayments; }
-    public void setInPayments(int inPayments) { this.inPayments = inPayments; }
-
-    //MONEY FUNCTIONS
-    public void addMoney(Player player, int amount){
-        player.setInPayments(player.getInPayments() + amount);
-        player.setTotalMoney(player.getTotalMoney() + amount);
+    public String getName(){ return name; }
+    public int getBalance(){ return balance; }
+    public boolean deposit(int amnt){
+        if(amnt < 1) return false;
+        balance += amnt;
+        total_income += amnt;
+        return true;
+    }
+    public boolean withdraw(int amnt){
+        // if(amnt < 1 || balance - amnt < 1) return false;
+        balance -= amnt;
+        total_payments += amnt;
+        return true;
+    }
+    public Field getPosition() {
+        return position;
+    }
+    public void setPosition(Field position) {
+        this.position = position;
+    }
+    public String getColor() {
+        return color;
     }
 
-    public void subtractMoney(Player player, int amount){
-        player.setOutPayments(player.getOutPayments() + amount);
-        player.setTotalMoney(player.getTotalMoney() - amount);
-    }
 
-    public String notifyBalanceBeforeBuying(Player player, int amountToPay){
+    public String notifyBalanceBeforeBuying(int amountToPay){
         String notification;
-        int resultingBalance = player.getTotalMoney() - amountToPay;
+        int resultingBalance = balance - amountToPay;
         if(resultingBalance <= -1){
             notification = "After this transaction, your balance will be negative: $ " + resultingBalance;
         } else if(resultingBalance == 0) {
