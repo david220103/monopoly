@@ -3,8 +3,8 @@
         "name": "Erdberg",
         "price": 200,
         "rent": 20,
-        "prices": "Monopoly",
-        "properties": 2,
+        "prices": [],
+        "properties": 0,
         "owner": null,
         "type": "STATION"
     },
@@ -12,8 +12,8 @@
         "name": "Westbahnhof",
         "price": 200,
         "rent": 20,
-        "prices": "Monopoly",
-        "properties": 2,
+        "prices": [],
+        "properties": 0,
         "owner": null,
         "type": "STATION"
     },
@@ -21,8 +21,8 @@
         "name": "Hauptbahnhof",
         "price": 200,
         "rent": 20,
-        "prices": "Monopoly",
-        "properties": 2,
+        "prices": [],
+        "properties": 0,
         "owner": null,
         "type": "STATION"
     },
@@ -30,8 +30,8 @@
         "name": "Praterstern",
         "price": 200,
         "rent": 20,
-        "prices": "Monopoly",
-        "properties": 2,
+        "prices": [],
+        "properties": 0,
         "owner": null,
         "type": "STATION"
     },
@@ -39,7 +39,7 @@
         "name": "Schlossallee",
         "price": 400,
         "rent": 50,
-        "prices": "40;200;600;1400;1700;2000",
+        "prices": [40, 200, 600, 1400, 1700, 2000],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -48,7 +48,7 @@
         "name": "Opernring",
         "price": 350,
         "rent": 45,
-        "prices": "35;175;500;1100;1300;1500",
+        "prices": [35, 175, 500, 1100, 1300, 1500],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -57,7 +57,7 @@
         "name": "Kärntner Straße",
         "price": 320,
         "rent": 40,
-        "prices": "30;160;470;1050;1250;1500",
+        "prices": [30, 160, 470, 1050, 1250, 1500],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -66,7 +66,7 @@
         "name": "Graben",
         "price": 300,
         "rent": 35,
-        "prices": "28;150;420;1000;1200;1400",
+        "prices": [28, 150, 420, 1000, 1200, 1400],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -75,7 +75,7 @@
         "name": "Stephansplatz",
         "price": 280,
         "rent": 30,
-        "prices": "25;120;360;850;1025;1200",
+        "prices": [25, 120, 360, 850, 1025, 1200],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -84,7 +84,7 @@
         "name": "Mariahilfer Straße",
         "price": 260,
         "rent": 25,
-        "prices": "22;110;330;800;975;1150",
+        "prices": [22, 110, 330, 800, 975, 1150],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -93,7 +93,7 @@
         "name": "Landstraßer Hauptstraße",
         "price": 240,
         "rent": 22,
-        "prices": "20;100;300;750;925;1100",
+        "prices": [20, 100, 300, 750, 925, 1100],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -102,7 +102,7 @@
         "name": "Leopoldstadt",
         "price": 220,
         "rent": 20,
-        "prices": "18;90;270;700;875;1050",
+        "prices": [18, 90, 270, 700, 875, 1050],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -111,7 +111,7 @@
         "name": "Neubau",
         "price": 200,
         "rent": 18,
-        "prices": "16;80;240;600;775;950",
+        "prices": [16, 80, 240, 600, 775, 950],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -120,7 +120,7 @@
         "name": "Wieden",
         "price": 180,
         "rent": 16,
-        "prices": "14;70;210;550;725;900",
+        "prices": [14, 70, 210, 550, 725, 900],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -129,7 +129,7 @@
         "name": "Margareten",
         "price": 160,
         "rent": 14,
-        "prices": "12;60;180;500;675;850",
+        "prices": [12, 60, 180, 500, 675, 850],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -138,7 +138,7 @@
         "name": "Favoriten",
         "price": 140,
         "rent": 12,
-        "prices": "10;50;150;450;625;800",
+        "prices": [10, 50, 150, 450, 625, 800],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -147,7 +147,7 @@
         "name": "Simmering",
         "price": 120,
         "rent": 10,
-        "prices": "8;40;120;400;575;750",
+        "prices": [8, 40, 120, 400, 575, 750],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -156,7 +156,7 @@
         "name": "Meidling",
         "price": 100,
         "rent": 8,
-        "prices": "6;30;90;350;525;700",
+        "prices": [6, 30, 90, 350, 525, 700],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -165,7 +165,7 @@
         "name": "Hietzing",
         "price": 90,
         "rent": 6,
-        "prices": "5;25;80;300;475;650",
+        "prices": [5, 25, 80, 300, 475, 650],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -174,7 +174,7 @@
         "name": "Penzing",
         "price": 80,
         "rent": 5,
-        "prices": "4;20;60;250;425;600",
+        "prices": [4, 20, 60, 250, 425, 600],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -183,7 +183,7 @@
         "name": "Rudolfsheim-Fünfhaus",
         "price": 70,
         "rent": 4,
-        "prices": "3;15;50;200;375;550",
+        "prices": [3, 15, 50, 200, 375, 550],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -192,7 +192,7 @@
         "name": "Ottakring",
         "price": 60,
         "rent": 3,
-        "prices": "2;10;40;180;355;530",
+        "prices": [2, 10, 40, 180, 355, 530],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -201,7 +201,7 @@
         "name": "Hernals",
         "price": 50,
         "rent": 2,
-        "prices": "1;5;20;160;335;510",
+        "prices": [1, 5, 20, 160, 335, 510],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -210,7 +210,7 @@
         "name": "Währing",
         "price": 40,
         "rent": 1,
-        "prices": "1;5;20;140;315;490",
+        "prices": [1, 5, 20, 140, 315, 490],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -219,7 +219,7 @@
         "name": "Döbling",
         "price": 30,
         "rent": 1,
-        "prices": "1;5;20;120;295;470",
+        "prices": [1, 5, 20, 120, 295, 470],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -228,7 +228,7 @@
         "name": "Brigittenau",
         "price": 20,
         "rent": 1,
-        "prices": "1;5;20;100;275;450",
+        "prices": [1, 5, 20, 100, 275, 450],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -237,7 +237,7 @@
         "name": "Floridsdorf",
         "price": 10,
         "rent": 1,
-        "prices": "1;5;20;80;255;430",
+        "prices": [1, 5, 20, 80, 255, 430],
         "properties": 0,
         "owner": null,
         "type": "STREET"
@@ -246,7 +246,7 @@
         "name": "Geh-ins-Gefängnis",
         "price": 0,
         "rent": 0,
-        "prices": "Monopoly",
+        "prices": [],
         "properties": 0,
         "owner": null,
         "type": "GO_TO_PRISON"
@@ -255,7 +255,7 @@
         "name": "Gefängnis",
         "price": 0,
         "rent": 0,
-        "prices": "Monopoly",
+        "prices": [],
         "properties": 0,
         "owner": null,
         "type": "PRISON"
@@ -264,7 +264,7 @@
         "name": "Frei Parken",
         "price": 0,
         "rent": 0,
-        "prices": "Monopoly",
+        "prices": [],
         "properties": 0,
         "owner": null,
         "type": "FREE_PARKING"
@@ -273,7 +273,7 @@
         "name": "Startfeld",
         "price": 0,
         "rent": 0,
-        "prices": "Monopoly",
+        "prices": [],
         "properties": 0,
         "owner": null,
         "type": "START"

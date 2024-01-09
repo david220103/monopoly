@@ -1,7 +1,14 @@
 package com.monopoly.monopoly;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.*;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class GameManager {
     private LinkedList<Field> listOfFields = new LinkedList<>();
@@ -34,48 +41,29 @@ public class GameManager {
     }
 
     public GameManager(){
-        listOfFields.add(new Field(Field.Type.START, "Start", 0, 0, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Innere Stadt", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Leopoldstadt", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Landstraße", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.EVENT, "EVENT", 0, 0, this));
-        listOfFields.add(new Field(Field.Type.STATION, "Hauptbahnhof", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Wieden", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.EVENT, "Margareten", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Mariahilf", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Neubau", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.PRISON, "Gefängnis", 0, 0, this));
+        // Java ist ein klumpatt :( !!!
+        try {
+            URL resourceUrl = GameManager.class.getResource("fields.json");
+            System.out.println(resourceUrl);
+            JSONArray jsonArray = new JSONArray(resourceUrl);
 
-        listOfFields.add(new Field(Field.Type.STREET, "Josefstadt", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Alsergrund", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Favoriten", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Simmering", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STATION, "Erdberg BF", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Meidling", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Hietzing", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Penzing", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Rudolfsheim FH", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.FREE_PARKING, "gratis Parken", 0, 0, this));
+            for (int i = 0; i < jsonArray.length(); i++) {
+                // Get the current object in the array
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-        listOfFields.add(new Field(Field.Type.STREET, "Ottakring", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.EVENT, "EVENT", 0, 0, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Hernals", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Währing", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STATION, "Hütteldorf BF", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Döbling", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Brigittenau", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Floridsdorf", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Donaustadt", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.GO_TO_PRISON, "geh in hefen!", 0, 0, this));
+                // Access fields within the object
+                Field.Type type = Field.Type.valueOf(jsonObject.getString("type"));
+                String name = jsonObject.getString("name");
+                int price = jsonObject.getInt("price");
+                JSONArray prices_json = jsonObject.getJSONArray("prices");
+                int[] prices = new int[prices_json.length()];
+                for(int j = 0; j < prices_json.length(); j++) prices[j] = prices_json.getInt(j);
+                int rent = jsonObject.getInt("rent");
 
-        listOfFields.add(new Field(Field.Type.STREET, "Liesing", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Vösendorf", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Mödling", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Purkersdorf", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STATION, "Baden BF", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.EVENT, "EVENT", 0, 0, this));
-        listOfFields.add(new Field(Field.Type.STREET, "St. Pölten", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Eisenstadt", 150, 100, this));
-        listOfFields.add(new Field(Field.Type.STREET, "Prag", 150, 100, this));
+                listOfFields.add(new Field(type, name, price, prices, rent, this));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

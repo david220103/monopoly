@@ -5,6 +5,7 @@ module com.monopoly.monopoly {
     requires org.controlsfx.controls;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
+    requires org.json;
 
     opens com.monopoly.monopoly to javafx.fxml;
     exports com.monopoly.monopoly;

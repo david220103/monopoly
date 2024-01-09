@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Field {
     private int price;
     private int rent;
-    private String prices;
+    private int[] prices;
     private int properties;
     private Player owner;
     public enum Type{
@@ -15,15 +15,15 @@ public class Field {
     private Type type;
     public String name;
     private GameManager gm;
-    public Field(Type type, String name, int price, int rent, GameManager gm) {
+    public Field(Type type, String name, int price, int[] prices, int rent, GameManager gm) {
         this.price = price;
+        this.prices = prices;
         this.rent = rent;
-        this.owner = null;
         this.type = type;
         this.name = name;
-        this.properties = 0;
         this.gm = gm;
-        this.prices = price > 0 ? "$" + price +", $" +rent : "";
+        this.owner = null;
+        this.properties = 0;
     }
     public int getPrice() {
         return price;
@@ -70,7 +70,7 @@ public class Field {
         StringBuilder players = new StringBuilder();
         for(Player p:getPlayersOnField()) players.append(p.getColor()).append(p.getName()).append(" \u001B[0m");
 
-        if(owner == null) return "[" + String.join(" | ", name, players, prices) + "]";
-        return "[" + String.join(" | ", owner.getColor() + name + "\u001B[0m", Integer.toString(properties), players, prices) + "]";
+        if(owner == null) return "[" + String.join(" | ", name, players, prices.toString()) + "]";
+        return "[" + String.join(" | ", owner.getColor() + name + "\u001B[0m", Integer.toString(properties), players, prices.toString()) + "]";
     }
 }
