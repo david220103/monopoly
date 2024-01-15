@@ -1,14 +1,10 @@
 package com.monopoly.monopoly;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import java.io.File;
 import java.util.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class GameManager {
     private LinkedList<Field> listOfFields = new LinkedList<>();
@@ -21,6 +17,22 @@ public class GameManager {
     public void setListOfPlayers(LinkedList<Player> listOfPlayers) {
         this.listOfPlayers = listOfPlayers;
     }
+
+    private void loadDataFromJson(){
+        ObjectMapper objectMapper = new ObjectMapper();
+        try{
+            File fieldsJson = new File("src/main/resources/com/monopoly/monopoly/fields.json");
+            LinkedList<Field> fields = objectMapper.readValue(fieldsJson, new TypeReference<>() {});
+            for (Field field:fields) {
+                field.setGm(this);
+            }
+             listOfFields = fields;
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     public int[] throwDice(){ //TODO: Implement in GUI (e.g., animation two dice?)
         Random random = new Random();
         int [] twoDice = new int [2];
@@ -40,30 +52,10 @@ public class GameManager {
         player.setPosition(listOfFields.get(indexTargetField));
     }
 
+
     public GameManager(){
         // Java ist ein klumpatt :( !!!
-        try {
-            URL resourceUrl = GameManager.class.getResource("fields.json");
-            System.out.println(resourceUrl);
-            JSONArray jsonArray = new JSONArray(resourceUrl);
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                // Get the current object in the array
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                // Access fields within the object
-                Field.Type type = Field.Type.valueOf(jsonObject.getString("type"));
-                String name = jsonObject.getString("name");
-                int price = jsonObject.getInt("price");
-                JSONArray prices_json = jsonObject.getJSONArray("prices");
-                int[] prices = new int[prices_json.length()];
-                for(int j = 0; j < prices_json.length(); j++) prices[j] = prices_json.getInt(j);
-                int rent = jsonObject.getInt("rent");
-
-                listOfFields.add(new Field(type, name, price, prices, rent, this));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //Ja Stimmt :D
+        loadDataFromJson();
     }
 }

@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class GameMainApplication extends Application {
@@ -15,6 +14,7 @@ public class GameMainApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+//        GameManager gm = new GameManager();
     }
 
     public static void main(String[] args) {
