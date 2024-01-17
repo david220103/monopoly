@@ -16,6 +16,8 @@ CLI Game is a command-line interface (CLI) game that offers an interactive gamin
    ```bash
    git clone https://github.com/leonkosnar/monopoly.git
 
+2. Checkout the gameManager branch 
+
 ## Usage
 Run the game using the CLI_Game.java
 After the map is displayed, press Enter to start the game.
