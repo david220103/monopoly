@@ -23,6 +23,9 @@ After the map is displayed, press Enter to start the game.
 ## Beta Version Note
 In the beta version, the dice rolling process is manual. You need to specify the number of steps to advance in the game.
 
+# GUI
+- is on the way :D 
+
 ## Features
 - A
 - B
