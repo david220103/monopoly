@@ -54,7 +54,7 @@ public class CLI_Game {
                 System.out.println("DICE: " + dice[0] + " + " + dice[1] + " = " + (dice[0]+dice[1]));
                 gm.movePlayer(p, dice);
                 Field field = p.getPosition();
-                if(field.getType() == Field.Type.GO_TO_PRISON){
+                if(field.getType().equals("GO_TO_PRISON")){
                     p.setPosition(gm.getListOfFields().get(10));
                     print(p.getName(), p.getColor());
                     print(" went to prison!", RED);
