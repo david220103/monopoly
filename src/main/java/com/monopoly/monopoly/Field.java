@@ -1,73 +1,79 @@
 package com.monopoly.monopoly;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Field {
-    @JsonProperty("price")
+    private String id;
+    public String name;
     private int price;
-    @JsonProperty("rent")
     private int rent;
-    @JsonProperty("prices")
     private int[] prices;
-    @JsonProperty("properties")
     private int properties;
-    @JsonProperty("owner")
     private Player owner;
     public enum Type{
-        START, STREET, EVENT, STATION, PRISON, GO_TO_PRISON, FREE_PARKING;
+        START, DISTRICT, EVENT, NOTHING, KLIMA_BONUS, STATION, PRISON, GO_TO_PRISON, FREE_PARKING;
     }
-    @JsonProperty("type")
-    private String type;
-    @JsonProperty("name")
-    public String name;
-    private GameManager gm;
+    private Type type;
+    private String description;
 
-    public Field(){
+    private GameManager gameManager;
 
-    }
-
-    public Field(String type, String name, int price, int[] prices, int rent, GameManager gm) {
-        this.price = price;
-        this.prices = prices;
-        this.rent = rent;
-        this.type = type;
+    public Field(String id, String name, Type type, String description, GameManager gameManager){
+        this.id = id;
         this.name = name;
-        this.gm = gm;
-        this.owner = null;
+        this.type = type;
+        this.description = description;
+        this.gameManager = gameManager;
+    }
+
+    public Field(String id, String name, int price, int rent, int[] prices, Type type, String description, GameManager gameManager) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.rent = rent;
+        this.prices = prices;
+        this.type = type;
         this.properties = 0;
+        this.owner = null;
+        this.description = description;
+        this.gameManager = gameManager;
     }
-    public int getPrice() {
-        return price;
-    }
-    public int getRent() {
-        return rent * (properties + 1);
-    }
-    public int getProperties() {
-        return properties;
-    }
-    public Player getOwner() {
-        return owner;
-    }
-    public String getType() {
-        return type;
-    }
-    public void setGm(GameManager gm){
-        this.gm = gm;
-    }
-    public String getName() {
-        return name;
-    }
+
+    //Setters and getters
+    public void setId(String id){this.id = id;}
+    public String getId(){return this.id;}
+    public void setName(String name){this.name = name;}
+    public String getName(){return this.name;}
+    public void setPrice(int price){this.price = price;}
+    public int getPrice(){return this.price;}
+    public void setRent(int rent){this.rent = rent;}
+    public int getRent(){return this.rent * (properties + 1);}
+    public void setProperties(int number){this.properties = this.properties + number;}
+    public int getProperties(){return this.properties;}
+    public void setOwner(Player player){this.owner = player;}
+    public Player getOwner(){return this.owner;}
+    public void setType(Type type){this.type = type;}
+    public Type getType(){return this.type;}
+    public void setDescription(String description){this.description = description;}
+    public String getDescription(){return this.description;}
+
+    //Class functions
+
+
+
+
+
+
+
 
     public boolean action(Player p){
-        if(!type.equals("STATION")  && !type.equals("STREET")) return false;
+        if(type != Type.STATION && type != Type.DISTRICT) return false;
         if(owner == null && p.withdraw(price)) {
             owner = p;
             return true;
         }
-        if(owner == p && type.equals("STREET")&&
+        if(owner == p && type == Type.DISTRICT &&
             properties < 6 && p.withdraw(price)) {
             properties += 1;
             return true;
@@ -75,19 +81,19 @@ public class Field {
         return false;
     }
 
-    private ArrayList<Player> getPlayersOnField(){
+    /*private ArrayList<Player> getPlayersOnField(){
         ArrayList<Player> list = new ArrayList<>();
-        for(Player p:gm.getListOfPlayers()){
-            if(p.getPosition() == this) list.add(p);
+        for(Player p:gameManager.getListOfPlayers()){
+            if(p.getCurrentPosition() == this) list.add(p);
         }
         return list;
-    }
-    @Override
+    }*/
+   /* @Override
     public String toString() {
         StringBuilder players = new StringBuilder();
         for(Player p:getPlayersOnField()) players.append(p.getColor()).append(p.getName()).append(" \u001B[0m");
 
-        if(owner == null) return "[" + String.join(" | ", name, players, Arrays.toString(prices)) + "]";
+        if(owner == null) return "[" + String.join(" | ", name, players, prices.toString()) + "]";
         return "[" + String.join(" | ", owner.getColor() + name + "\u001B[0m", Integer.toString(properties), players, prices.toString()) + "]";
-    }
+    }*/
 }
