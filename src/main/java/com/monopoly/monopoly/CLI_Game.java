@@ -26,15 +26,15 @@ public class CLI_Game {
         System.out.println("\r\n----------------------------");
         for(Field f: gm.getListOfFields()) System.out.println(f);
     }
-    public static void main(String[] args) throws IOException {
+   /* public static void main(String[] args) throws IOException {
         Scanner in = new Scanner(System.in);
         GameManager gm = new GameManager();
         LinkedList<Player> listOfPlayers = new LinkedList<>();
-        Player p1 = new Player(1, "Barbara", GREEN, gm);
-        listOfPlayers.add(p1);
-        Player p2 = new Player(2, "David", CYAN, gm);
-        listOfPlayers.add(p2);
-        gm.setListOfPlayers(listOfPlayers);
+        //Player p1 = new Player(1, "Barbara", GREEN, gm);
+        //listOfPlayers.add(p1);
+        //Player p2 = new Player(2, "David", CYAN, gm);
+        //listOfPlayers.add(p2);
+        //gm.setListOfPlayers(listOfPlayers);
 
         printGame(gm);
         in.nextLine(); // Print board and wait for start
@@ -53,9 +53,9 @@ public class CLI_Game {
                 int[] dice = {0, in.nextInt()};
                 System.out.println("DICE: " + dice[0] + " + " + dice[1] + " = " + (dice[0]+dice[1]));
                 gm.movePlayer(p, dice);
-                Field field = p.getPosition();
-                if(field.getType().equals("GO_TO_PRISON")){
-                    p.setPosition(gm.getListOfFields().get(10));
+                Field field = p.getCurrentPosition();
+                if(field.getType() == Field.Type.GO_TO_PRISON){
+                    p.setCurrentPosition(gm.getListOfFields().get(10));
                     print(p.getName(), p.getColor());
                     print(" went to prison!", RED);
                     continue;
@@ -78,9 +78,9 @@ public class CLI_Game {
                 else{
                     print("\r\n>", PURPLE);
                     int choice = in.nextInt();
-                    if(choice == 1 && !p.getPosition().action(p)) print("action unavailable\r\n", RED);
+                    if(choice == 1 && !p.getCurrentPosition().action(p)) print("action unavailable\r\n", RED);
                 }
             }
         }
-    }
+    }*/
 }
