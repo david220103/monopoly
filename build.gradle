@@ -25,8 +25,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-  mainModule = 'com.monopoly.monopoly'
-  mainClass = 'com.monopoly.monopoly.HelloApplication'
+  mainModule = 'com.monopoly.monopoly/GameMainApplication'
+  mainClass = 'com.monopoly.monopoly.GameMainApplication'
 }
 
 javafx {
@@ -39,7 +39,6 @@ dependencies {
   implementation('org.kordamp.ikonli:ikonli-javafx:12.3.1')
   implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
   implementation('org.json:json:20231013')
-  implementation ('com.fasterxml.jackson.core:jackson-databind:2.14.2')
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
@@ -59,3 +58,4 @@ jlink {
 jlinkZip {
   group = 'distribution'
 }
+
