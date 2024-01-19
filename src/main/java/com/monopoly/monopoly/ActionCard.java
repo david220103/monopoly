@@ -8,15 +8,18 @@ public class ActionCard {
 
     private ActionCardName actionCardName;
     private String text;
+    private String title;
 
     //CONSTRUCTOR
-    public ActionCard(ActionCardName actionCardName, String text){
+    public ActionCard(ActionCardName actionCardName, String text, String title){
         this.actionCardName = actionCardName;
         this.text = text;
+        this.title = title;
     }
 
     //GETTERS & SETTERS
-    public String getText(){ return text; }
+    public String getText(){ return this.text; }
+    public String getTitle() { return this.title; }
 
     //TODO je nach karte aktion direkt durchführen und str zurückgeben
 }
