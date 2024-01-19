@@ -1,54 +1,87 @@
 package com.monopoly.monopoly;
 
-import java.util.Random;
+
+import java.util.LinkedList;
+
+import static com.monopoly.monopoly.GameManager.listOfFields;
 
 public class Player {
-    private int id; //Each player has a unique Id in case of same names
-    private String name; //Name of the player
-    private int balance; //How much money the player has at any moment
-    private int total_payments; //For statistics (how much has the player paid out: e.g., Miete, Stafe, Steuern, usw.)
-    private int total_income; //For statistics (how much has the player received: e.g., Gehalt, Klimabonus, erhaltende Miete, usw.)
-    private Field position; //Where is the player standing
-    private boolean has_out_of_jail_card; //Does the player possess an out of jail card
-    private GameManager gameManager;
+    private String id;
+    private String name;
+    private int balance;
+    private int totalPayments; //For statistics (how much has the player paid out: e.g., Miete, Stafe, Steuern, usw.)
+    private int totalIncome; //For statistics (how much has the player received: e.g., Gehalt, Klimabonus, erhaltende Miete, usw.)
+    private int previousPositionIndex;
+    private int currentPositionIndex; //Where is the player standing
+    private boolean hasOutOfJailCard; //Does the player possess an out of jail card
     private String color;
+    private int roundNumber;
+    private LinkedList <ActionCard> events;
+    private LinkedList <Field> own;
 
-    public Player(int id, String name, String color, GameManager gameManager) {
+    public Player(String id, String name, String color) {
         this.id = id;
         this.name = name;
         this.balance = 200;
-        this.total_payments = 0;
-        this.total_income = 200;
-        this.gameManager = gameManager;
-        this.position = gameManager.getListOfFields().get(0);
-        this.has_out_of_jail_card = false;
+        this.totalPayments = 0;
+        this.totalIncome = 200;
+        this.previousPositionIndex = 0;
+        this.currentPositionIndex = 0;
+        this.hasOutOfJailCard = false;
         this.color = color;
+        this.roundNumber = 1;
+        this.events = new LinkedList<>();
+        this.own = new LinkedList<>();
     }
 
-    public String getName(){ return name; }
-    public int getBalance(){ return balance; }
-    public boolean deposit(int amnt){
-        if(amnt < 1) return false;
-        balance += amnt;
-        total_income += amnt;
-        return true;
+    //Setters and getters
+    public void setId(String id){this.id = id; }
+    public String getId(){return this.id; }
+    public void setName(String name){this.name = name; }
+    public String getName(){ return this.name; }
+    public void setBalance(int balance){this.balance = balance; }
+    public int getBalance(){ return this.balance; }
+    public void setTotalPayments(int totalPayments){this.totalPayments = totalPayments; }
+    public int getTotalPayments(){return this.totalPayments; }
+    public void setTotalIncome(int totalIncome){this.totalIncome = totalIncome; }
+    public int getTotalIncome(){return this.totalIncome; }
+    public void setPreviousPositionIndex(int previousPositionIndex) {
+        this.previousPositionIndex = previousPositionIndex;
     }
-    public boolean withdraw(int amnt){
-        // if(amnt < 1 || balance - amnt < 1) return false;
-        balance -= amnt;
-        total_payments += amnt;
-        return true;
-    }
-    public Field getPosition() {
-        return position;
-    }
-    public void setPosition(Field position) {
-        this.position = position;
-    }
+    public int getPreviousPositionIndex() { return this.previousPositionIndex; }
+    public void setCurrentPositionIndex(int currentPositionIndex){this.currentPositionIndex = currentPositionIndex; }
+    public int getCurrentPositionIndex(){return this.currentPositionIndex; }
+    public void setHasOutOfJailCard(Boolean tF){this.hasOutOfJailCard = tF; }
+    public Boolean getHasOutOfJailCard(){return this.hasOutOfJailCard; }
+    public void setColor(String color){this.color = color; }
     public String getColor() {
         return color;
     }
+    public void setRoundNumber(int roundNumber){this.roundNumber = roundNumber; }
+    public int getRoundNumber() {return this.roundNumber; }
+    public void setEvents(LinkedList<ActionCard> events){this.events = events; }
+    public LinkedList <ActionCard> getEvents(){ return this.events; }
+    public void setOwn(LinkedList<Field> events){this.own = own; }
+    public LinkedList <Field> getOwn(){ return this.own; }
 
+    //Class functions
+
+    public boolean deposit(int amount){
+        if(amount < 1){
+            return false;
+        } else {
+            balance += amount;
+            totalIncome += amount;
+            return true;
+        }
+    }
+
+    public boolean withdraw(int amount){
+        // if(amnt < 1 || balance - amnt < 1) return false;
+        balance -= amount;
+        totalPayments += amount;
+        return true;
+    }
 
     public String notifyBalanceBeforeBuying(int amountToPay){
         String notification;
